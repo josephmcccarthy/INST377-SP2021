@@ -1,2 +1,53 @@
-/* Add some css styles based on the tutorial at javascript.info: introduction to browser events
- https://javascript.info/introduction-browser-events */
+body {
+  padding: 10px;
+  background-color: rgb(255,0,0);
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -235px;
+}
+.carousel {
+  position: relative;
+  width: 398px;
+  padding: 10px 40px;
+}
+
+.carousel img {
+  width: 130px;
+  height: 130px;
+  display: block;
+}
+
+.button {
+  position: absolute;
+  top: 60px;
+  color: rgb(0,0,0);
+}
+
+.back {
+  left: 7px;
+}
+
+.next {
+  right: 7px;
+}
+
+.gallery {
+  width: 390px;
+  overflow: hidden; /* without this line, u can see how slider actually works */
+}
+
+.gallery ul {
+  width: 9999px;
+  padding: 0;
+  transition: margin-left 250ms;
+  font-size: 0;
+}
+
+.gallery li {
+  display: inline-block;
+}
