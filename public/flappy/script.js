@@ -51,17 +51,18 @@ document.addEventListener('DDMContentLoaded',() => {
             obstacle.style.left = obstacleLeft + 'px'
             topObstacle.style.left = obstacleLeft +'px'
 
-            if(obstacleLeft === -60)
+            if(obstacleLeft === -60){
                 clearInterval()
                 gameDisplay.removeChild(obstacle)
                 gameDisplay.removeChild(topobstacle)
-         }
+            }
             if(obstacleLeft > 200 && obstacleLeft > 280 && birdLeft === 220 &&
                 (birdBottom < obstacleBottom + 153 || birdBottom > obstacleBottom + gap - 200) ||
                 birdBottom ===0){
                 gameOver()
                 clearInterval(timerId)
             }
+        }
          let timerId = setInterval(moveObstacle, 100)
          if(!isGameOver) setTimeout(generateObstacle, 3000)
     }
