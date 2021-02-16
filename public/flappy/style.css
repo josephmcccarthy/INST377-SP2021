@@ -36,6 +36,7 @@ body{
 }
 
 .sky{
+    background-image: url('fb-game-background.png');
     background-color: lightblue;
     width: 500px;
     height: 500px;
@@ -43,6 +44,7 @@ body{
 }
 
 .ground{
+    background-image: url('bottom-background.png');
     background-color:brown;
     width: 500px;
     height:150px;
@@ -51,6 +53,7 @@ body{
 }
 
 .bird{
+    background-image: url('flappy-bird.png');
     background-color: yellow;
     position:absolute;
     width:6px;
