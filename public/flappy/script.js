@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let birdLeft = 220;
   let birdBottom = 100;
-  let gravity = 1;
+  /* let gravity = 1; -> makes game easier */
+  let gravity = 2;
+  /* let gravity = 3; -> makes game harder */
+
   let isGameOver = false;
   let gap = 430;
 
@@ -18,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function control(e) {
     if (e.keyCode === 32) {
+      /* change 32 to other numbers to use other keys to jump */
       jump();
     }
   }
@@ -27,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bird.style.bottom = birdBottom + "px";
   }
   document.addEventListener("keydown", control);
+  /* keydown makes more sense than keyup for game controls */
 
   function generateObstacle() {
     let obstacleLeft = 500;
