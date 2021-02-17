@@ -1,76 +1,81 @@
-body{
+body {
     display: flex;
+    font-size: 100px;
+    text-align: center;
 }
 
-.game_container{
+.game-container {
     width: 500px;
     height: 730px;
-    position:absolute;
-    left: 0px;
+    position: absolute;
+    left: 80px;
 }
 
-.border-left{
+.border-left {
     width: 80px;
     height: 790px;
-    position: absolute;
-    background-color:white;
+    position:  absolute;
+    background-color: white;
     z-index: +2;
 }
 
-.border-right{
+.border-right {
     width: 80px;
     height: 790px;
-    position: absolute;
-    background-color:white;
-    z-index: +2;
-    left: 500px;
-}
-
-.border-top{
-    width: 660px;
-    height: 50px;
     position: absolute;
     background-color: white;
-    z-index: +2
-    /* top: -50px; */
+    z-index: +2;
+    left: 580px;
 }
 
-.sky{
+.border-top {
+    width: 660px;
+    height: 50px;
+    position:  absolute;
+    background-color: white;
+    z-index: +2;
+    top: -50px;
+}
+
+.sky {
     background-image: url('fb-game-background.png');
     background-color: lightblue;
     width: 500px;
-    height: 500px;
-    position:absolute;
+    height: 580px;
+    position: absolute;
 }
 
-.ground{
+.ground {
     background-image: url('bottom-background.png');
-    background-color:brown;
-    width: 500px;
-    height:150px;
+    /* background-color: brown; */
+    width: 580px;
+    height: 150px;
     position: absolute;
+    top: 580px;
     z-index: +1;
 }
 
-.bird{
+.bird {
     background-image: url('flappy-bird.png');
-    background-color: yellow;
-    position:absolute;
-    width:6px;
-    height:45px;
+    /* background-color: yellow; */
+    position: absolute;
+    width: 60px;
+    height: 45px;
+    left: 220px;
+    bottom: 100px;
 }
 
-.obstacle{
+.obstacle {
     background-image: url('flappybird-pipe.png');
-    background-color: green;
-    width:60px;
-    height:300px
+    width: 60px;
+    height: 300px;
+    position: absolute;
 }
 
-.topObstacle{
+.topObstacle {
     background-image: url('flappybird-pipe.png');
     transform: rotate(180deg);
-    background-color: green;
-    width:60px;
-    height:300px
+    width: 60px;
+    height: 300px;
+    position: absolute;
 }
