@@ -1,83 +1,68 @@
 function mapInit() {
-    // follow the Leaflet Getting Started tutorial here
-    return map;
-  }
-  
-  async function dataHandler(mapObjectFromFunction) {
-    // use your assignment 1 data handling code here
-    // and target mapObjectFromFunction to attach markers
-  }
-  
-  async function windowActions() {
-    const map = mapInit();
-    await dataHandler(map);
-  }
-  
-  window.onload = windowActions;
-
-const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
-
-const cities = [];
-
-fetch(endpoint)
-.then(blob => blob.json())
-.then(data => cities.push(...data))
-
-function findMatches(wordToMatch, cities){
-    return cities.filter(place => { 
-        const regex = new RegExp(wordToMatch,'gi');
-        return place.name.match(regex) || place.category.match(regex)
-    })};
-    
-function displayMatches() {
-    const matchArray = findMatches(this.value,cities);
-    let html = matchArray.map(place => {
-        const regex = new RegExp(this.value,'gi');
-        return `
-        <li>
-        <span class="name">${place.name} </span>
-        <address>
-        <span class="address_line_1">${place.address_line_1}</span>
-        </address>
-        <span class="category">${place.category}</span>
-        </li>
-        `;
-    }).join('');
-    if (this.value.length == 0) {
-        html = [];}
-    suggestions.innerHTML = html;
+  const mymap = L.map("mapid").setView([38.9897, -76.9378], 13);
+  L.tileLayer(
+    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+    {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: "mapbox/streets-v11",
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken:
+        "pk.eyJ1IjoibmF0YWxpZXNlbG1lciIsImEiOiJja20yYno4djUxNXdkMnZxbTkyZDNya25kIn0.pt1fo8spQ3yYmYDVYid41g",
+    }
+  ).addTo(mymap);
+  console.log("mymap", mymap);
+  return mymap;
 }
 
-const searchInput = document.querySelector('.text');
-const suggestions = document.querySelector('.results');
+async function dataHandler(mapFromLeaflet) {
+  const form = document.querySelector("#form");
+  const search = document.querySelector("#search");
+  const targetList = document.querySelector(".target-list");
+  // const replyMessage = document.querySelector('.reply-message');
+  const request = await fetch(
+    "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"
+  );
+  data = await request.json();
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const filtered = data.filter(
+      (place) => place.geocoded_column_1 && place.zip.includes(search.value)
+    );
+    const topFive = filtered.slice(0, 5);
+    console.table(topFive);
+    targetList.innerHTML = "";
+    /* if(topFive.length<1){
+      replyMessage.classList.add('box');
+      replyMessage.innerText = "no matches found";
+    } else {
+    */
+    topFive.forEach((item) => {
+      const longLat = item.geocoded_column_1.coordinates;
+      const marker = L.marker([longLat[1], longLat[0]]).addTo(mapFromLeaflet);
+      const appendItem = document.createElement("li");
+      appendItem.classList.add("block");
+      appendItem.classList.add("list-item");
+      appendItem.innerHTML = `<div class ='name'>${item.name}</div><div class='address'>${item.address_line_1}</div>`;
+      targetList.append(appendItem);
+    });
+    const { coordinates } = topFive[0]?.geocoded_column_1;
+    mapFromLeaflet.panTo([coordinates[1], coordinates[0]], 0);
+  });
+}
+/*
+search.addEventListener('input', (event) => {
+  if(search.value.length===0){
+    replyMessage.innerText='';
+    replyMessage.classList.remove('box');
+  }
+  });
+*/
+async function windowActions() {
+  const map = mapInit();
+  await dataHandler(map);
+}
 
-searchInput.addEventListener('change', displayMatches);
-searchInput.addEventListener('keyup', displayMatches);
-
-// async function windowActions(){
-//     const form = document.querySelector('.userform');
-//     const search = document.querySelector('#name');
-//     const targetList = document.querySelector('.target-list');
-      
-//     const request = await fetch('/api');
-//     const data = await request.json();   
-  
-//     form.addEventListener('submit', async(event) => {
-//       event.preventDefault();
-//       console.log('submit fired', search.value);
-//       const filtered = data.filter((record) => record.city.toUpperCase() === search.value.toUpperCase());
-//       filtered.forEach((item) =>{
-//         const appendItem = document.createElement("li");
-//         appenditem.classList += `${appendBox.classList} box`;
-//         appendItem.innerText = item.city;
-//         //appendItem.innerText = item.category
-//         //appendItem.innerText = item.name
-//         targetList.append(appendItem); 
-//         });
-//       });
-  
-//     search.addEventListener('input', (event) =>{
-//       console.log('input', event.target.value);
-//       });
-//   } 
-//   window.onload = windowActions;
+window.onload = windowActions;

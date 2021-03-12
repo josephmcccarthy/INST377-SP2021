@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Joseph McCarthy Lab 5</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <div class= "container">
-    <div class = "wrapper">
-        <div class = "container">
-            <div class = "header">
-                <h1>Joseph McCarthy Lab 5</h1>
-            </div>
-            <form>
-                <input id="input" class = "text" type="text" placeholder="Enter Search">
-            </form>
-        </div>
+    <div class="columns">
+      <div class="column">
+        <h1 class="title">Joseph McCarthy Lab 5</h1>
+        <div class="subtitle">Zip Code Food Search</div>
+        <form action="" id="form">
+          <label for="search"></label>
+          <input
+            type="text"
+            name="search"
+            placeholder="Enter Zip Code"
+            class="search"
+            id="search"
+          />
+          <button type="submit" id="submit" class="button">Submit</button>
+        </form>
         <div class="cases">
-            <ul class="results"></ul>
-        </div>
+              <ul class="target-list"></ul>
+            </div>
+      </div>
+      <div class="column">
+        <div id="mapid"></div>
+      </div>
     </div>
-    </div>
+    <script src="script.js"></script>
   </body>
-  <script src = "script.js"></script>
 </html>
